@@ -295,8 +295,12 @@ String DateTime::toString(TimeFormat_t format ,TimeSeparatorFormat_t sep)
 #if DATETIME_USE_PRINT
 void DateTime::print(Stream &uart)
 {
-    uart.printf("%04d-%02d-%02d %02d:%02d:%02d.%03d week:%d,stamp:%0.0f;\tutcoffset:%d\n",year,month,day,\
-        hour,minute,second,milliSecond,dayOfWeek(),getTimeStamp(),utcOffset);
+    uart.printf("%04d-%02d-%02d %02d:%02d:%02d.%03d ",year,month,day,hour,minute,second,milliSecond);
+    uart.printf("week:%d\t",dayOfWeek());
+    uart.print("stamp:");
+    uart.print(getTimeStamp());
+    uart.print('\t');
+    uart.printf("utcoffset:%d\n",utcOffset);
 }
 #endif
 

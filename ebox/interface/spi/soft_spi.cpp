@@ -29,13 +29,13 @@
 
 
 #if EBOX_DEBUG_SPI_ENABLE
-#define softSpiDebug(...)  ebox_printf("[sSPI DBG]:%d: ",__LINE__),ebox_printf(__VA_ARGS__ )
+#define softSpiDebug(...)  rt_kprintf("[sSPI DBG]:%d: ",__LINE__),rt_kprintf(__VA_ARGS__ )
 #else
 #define softSpiDebug(...)
 #endif
 
 #if EBOX_DEBUG_SPI_ENABLE_ERR
-#define softSpiDebugErr(fmt, ...)  ebox_printf("[sSPI err]:%d: " fmt "\n", __LINE__, __VA_ARGS__)
+#define softSpiDebugErr(fmt, ...)  rt_kprintf("[sSPI err]:%d: " fmt "\n", __LINE__, __VA_ARGS__)
 #else
 #define softSpiDebugErr(fmt, ...)
 #endif

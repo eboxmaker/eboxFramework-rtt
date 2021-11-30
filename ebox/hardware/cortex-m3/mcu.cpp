@@ -198,9 +198,6 @@ static void update_system_clock(CpuClock_t *clock)
 */
 static void update_chip_info()
 {
-    cpu.type = 1;
-    cpu.pins = 1;
-    memcpy(cpu.company, "123", sizeof("123"));
 
     uint8_t *p = (uint8_t *)(0X1FFFF7E8);
     for(int i = 0 ; i < 12; i++)

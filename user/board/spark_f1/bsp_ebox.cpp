@@ -19,19 +19,36 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "bsp_ebox.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 extern "C" {
 
     void console_uart_init()
     {
-        UART.begin(115200);
+        ConsoleUart.begin(115200);
     }
     void console_uart_putc(char ch)
     {
-        UART.write(ch);
+        ConsoleUart.write(ch);
     }
     void console_uart_write(const char *p,uint8_t len)
     {
-        UART.write(p,len);
+        ConsoleUart.write(p,len);
+        ConsoleUart.flush();
     }
 }
 /*
@@ -44,87 +61,91 @@ extern "C" {
 */
 void print_log(const char *name, const char *date)
 {
-    UART.print("\n");
-    UART.print("*************************************************************\n");
-    UART.print("* \r\n");	                /* 打印一行空格 */
-    UART.print("* 例程名称      : ");	    /* 打印例程名称 */
-    UART.println(name);
-    UART.print("* 发布日期      : ");	    /* 打印例程日期 */
-    UART.println(date);
+    ConsoleUart.print("\n");
+    ConsoleUart.print("*************************************************************\n");
+    ConsoleUart.print("* \r\n");	                /* 打印一行空格 */
+    ConsoleUart.print("* 例程名称      : ");	    /* 打印例程名称 */
+    ConsoleUart.println(name);
+    ConsoleUart.print("* 发布日期      : ");	    /* 打印例程日期 */
+    ConsoleUart.println(date);
 
-    UART.print("* 硬件平台      : ");       /* 硬件平台 */
-    UART.println(HARDWARE);
-    UART.print("* EBOX库版本    : ebox_V" );/* 版本信息 */
-    UART.println(EBOX_VERSION);
-    UART.print("*                     CPU 信息\n");	/* CPU信息 */
-    UART.println();
-    UART.print("* CPU PINS      : ");	    /* 打印CPU引脚数量 */
-    UART.println(cpu.pins);
-    UART.print("* CPU COMPANY   : ");	    /* 打印CPU公司 */
-    UART.println(cpu.company);
+    ConsoleUart.print("* 硬件平台      : ");       /* 硬件平台 */
+    ConsoleUart.println(HARDWARE);
+    ConsoleUart.print("* EBOX库版本    : ebox_V" );/* 版本信息 */
+    ConsoleUart.println(EBOX_VERSION);
+    ConsoleUart.print("*                     CPU 信息\n");	/* CPU信息 */
+    ConsoleUart.println();
+    ConsoleUart.print("* CPU COMPANY   : ");	    /* 打印CPU公司 */
+    ConsoleUart.println(cpu.company);
 
 
-    UART.print("* CPUID         : ");       /* 打印CPU唯一ID */
+    ConsoleUart.print("* CPUID         : ");       /* 打印CPU唯一ID */
     for(int i = 0 ; i <11; i++)
     {
-        UART.printf("%02X-",cpu.chip_id[i]);
+        ConsoleUart.printf("%02X-",cpu.chip_id[i]);
     }
-    UART.printf("%02X",cpu.chip_id[11]);
-    UART.printf("\n");
+    ConsoleUart.printf("%02X",cpu.chip_id[11]);
+    ConsoleUart.printf("\n");
 
 
 
-    UART.print("* core          : ");
-    UART.print(cpu.clock.core / 1000000.0);	/* 打印时钟树信息 */
-    UART.println("Mhz");
-    UART.print("* hclk          : ");
-    UART.print(cpu.clock.hclk / 1000000.0);
-    UART.println("Mhz");
-    UART.print("* pclk1         : ");
-    UART.print(cpu.clock.pclk1 / 1000000.0);
-    UART.println("Mhz");
-    UART.print("* pclk2         : ");
-    UART.print(cpu.clock.pclk2 / 1000000.0);
-    UART.println("Mhz");
+    ConsoleUart.print("* core          : ");
+    ConsoleUart.print(cpu.clock.core / 1000000.0);	/* 打印时钟树信息 */
+    ConsoleUart.println("Mhz");
+    ConsoleUart.print("* hclk          : ");
+    ConsoleUart.print(cpu.clock.hclk / 1000000.0);
+    ConsoleUart.println("Mhz");
+    ConsoleUart.print("* pclk1         : ");
+    ConsoleUart.print(cpu.clock.pclk1 / 1000000.0);
+    ConsoleUart.println("Mhz");
+    ConsoleUart.print("* pclk2         : ");
+    ConsoleUart.print(cpu.clock.pclk2 / 1000000.0);
+    ConsoleUart.println("Mhz");
 
 
-    UART.print("* flash size    : ");       /* 打印flash大小 */
-    UART.print(cpu.flash.size/1024);
-    UART.println("KB");
+    ConsoleUart.print("* flash size    : ");       /* 打印flash大小 */
+    ConsoleUart.print(cpu.flash.size/1024);
+    ConsoleUart.println("KB");
     
-    UART.print("* flash page size    : ");  /* 打印flash page大小 */
-    UART.print(cpu.flash.page_size);
-    UART.println("B");
+    ConsoleUart.print("* flash page size    : ");  /* 打印flash page大小 */
+    ConsoleUart.print(cpu.flash.page_size);
+    ConsoleUart.println("B");
 
 
-    UART.print("* flash used    : ");	    /* 打印flash使用了多少KB */
-    UART.print(cpu.flash.used / 1024.0);
-    UART.println("KB");
+    ConsoleUart.print("* flash used    : ");	    /* 打印flash使用了多少KB */
+    ConsoleUart.print(cpu.flash.used / 1024.0);
+    ConsoleUart.println("KB");
 
-    UART.print("* flash remaind : ");	    /* 打印flash剩余了多少KB  */
-    UART.print((cpu.flash.size - cpu.flash.used) / 1024.0);
-    UART.println("KB");
+    ConsoleUart.print("* flash remaind : ");	    /* 打印flash剩余了多少KB  */
+    ConsoleUart.print((cpu.flash.size - cpu.flash.used) / 1024.0);
+    ConsoleUart.println("KB");
 
 
     rt_uint32_t total,used,remained;
     
     rt_memory_info(&total,&used,&remained);
     
-    UART.print("* mem size      : ");       /* 打印SRAM大小 */
-    UART.print(total / 1024.0);
-    UART.println("KB");
+    ConsoleUart.print("* mem used      : ");       /* 打印SRAM大小 */
+    ConsoleUart.print(MCU_SRAM1_USED / 1024.0);
+    ConsoleUart.println("KB");
 
-    UART.print("* heap used     : ");	    /* 打印heap使用率 */
-    UART.print(used / 1024.0);
-    UART.println("KB");
+    
+    
+    ConsoleUart.print("* heap size      : ");       /* 打印SRAM大小 */
+    ConsoleUart.print(total / 1024.0);
+    ConsoleUart.println("KB");
 
-    UART.print("* heap free     : ");	    /* 打印heap使用了多少KB */
-    UART.print(remained / 1024.0);
-    UART.println("KB");
+    ConsoleUart.print("* heap used     : ");	    /* 打印heap使用率 */
+    ConsoleUart.print(used / 1024.0);
+    ConsoleUart.println("KB");
 
-    UART.print("*\n");	                /* 打印一行空格 */
-    UART.print("*************************************************************\n");
-    UART.flush();
+    ConsoleUart.print("* heap free     : ");	    /* 打印heap使用了多少KB */
+    ConsoleUart.print(remained / 1024.0);
+    ConsoleUart.println("KB");
+
+    ConsoleUart.print("*\n");	                /* 打印一行空格 */
+    ConsoleUart.print("*************************************************************\n");
+    ConsoleUart.flush();
 }
 
 

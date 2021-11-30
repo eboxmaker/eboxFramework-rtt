@@ -33,13 +33,13 @@
 
 
 #if EBOX_DEBUG_IFLASH_ENABLE
-#define iflashDebug(...)  ebox_printf("[iflash DBG]:%d: ",__LINE__),ebox_printf(__VA_ARGS__ )
+#define iflashDebug(...)  rt_kprintf("[iflash DBG]:%d: ",__LINE__),rt_kprintf(__VA_ARGS__ )
 #else
 #define iflashDebug(...)
 #endif
 
 #if EBOX_DEBUG_IFLASH_ENABLE_ERR
-#define iflashDebugErr(fmt, ...)  ebox_printf("[iflash err]:%d: " fmt "\n", __LINE__, __VA_ARGS__)
+#define iflashDebugErr(fmt, ...)  rt_kprintf("[iflash err]:%d: " fmt "\n", __LINE__, __VA_ARGS__)
 #else
 #define iflashDebugErr(fmt, ...)
 #endif

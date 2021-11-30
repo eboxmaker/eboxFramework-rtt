@@ -25,6 +25,8 @@
 #include "mcu.h"
 #include "FunctionPointer.h"
 #include "dma.h"
+#include "cxx_Mutex.h"
+using namespace rtthread;
 
 /**
  * Modification History:
@@ -125,7 +127,7 @@ typedef void (*uart_irq_handler)(uint32_t id, IrqType type);
 class Uart: public Stream
 {
 public:
-    Uart(USART_TypeDef *USARTx, Gpio *tx_pin, Gpio *rx_pin, uint16_t tx_buffer_size = 64, uint16_t rx_buffer_size = 64);
+    Uart(USART_TypeDef *USARTx, Gpio *tx_pin, Gpio *rx_pin, uint16_t tx_buffer_size = 128, uint16_t rx_buffer_size = 128);
 
     //initial uart
     void    begin(uint32_t baud_rate, RxMode_t mode = RxDMA);
@@ -204,6 +206,7 @@ private:
     uint8_t             preemption_priority;
     uint8_t             sub_priority;
     bool                _is_inited;
+    Mutex               *mutex;
 protected:
     FunctionPointer _irq[2];
 };

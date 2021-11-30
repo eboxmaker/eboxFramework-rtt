@@ -30,13 +30,13 @@
 
 
 #if EBOX_DEBUG_MCUSPI_ENABLE
-#define mcuSpiDebug(...)  ebox_printf("[mcuSPI DBG]:%d: ",__LINE__),ebox_printf(__VA_ARGS__ )
+#define mcuSpiDebug(...)  rt_kprintf("[mcuSPI DBG]:%d: ",__LINE__),rt_kprintf(__VA_ARGS__ )
 #else
 #define mcuSpiDebug(...)
 #endif
 
 #if EBOX_DEBUG_MCUSPI_ENABLE_ERR
-#define mcuSpiDebugErr(fmt, ...)  ebox_printf("[mcuSPI err]:%d: " fmt "\n", __LINE__, __VA_ARGS__)
+#define mcuSpiDebugErr(fmt, ...)  rt_kprintf("[mcuSPI err]:%d: " fmt "\n", __LINE__, __VA_ARGS__)
 #else
 #define mcuSpiDebugErr(fmt, ...)
 #endif
@@ -495,7 +495,7 @@ int8_t mcuSpi::take(Config_t *newConfig)
         delay_ms(1);
         if (IsTimeOut(end, 200))
         {
-            ebox_printf("\nSPI产生多线程异常调用\n");
+            rt_kprintf("\nSPI产生多线程异常调用\n");
             return EWAIT;
         }
     }

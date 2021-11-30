@@ -20,20 +20,23 @@
 #ifndef __BSP_EBOX_H
 #define __BSP_EBOX_H
 
-    
 #ifdef __cplusplus
+
+
 #include "ebox.h"
 #include "EventManager.h"
 #include "soft_i2c.h"
 
-#define UART uart1
-#define Serial UART
+
+#define	HARDWARE	"ebox_spark£¬STM32F103C8T6"
+#define ConsoleUart uart1
+#define UART      uart1
+#define Serial      uart1
 
 extern void print_log(const char *name = "test", const char *date = __DATE__);
  
 
 
-#define	HARDWARE	"ebox_spark£¬STM32F103C8T6"
 
 
 #define BTN1 PA8
@@ -47,17 +50,26 @@ extern void print_log(const char *name = "test", const char *date = __DATE__);
 #define LED3 PB10
 #define I2C  i2c2
 
+
+
 #endif
+
+
+
+
+
+
+
 
 
 
 #if __cplusplus
 extern "C" {
 #endif
-#include "ebox_core.h"
 extern void console_uart_init();
 extern void console_uart_putc(char ch);
-extern void console_uart_write(const char *p,uint8_t len);
+extern void console_uart_write(const char *p,unsigned char len);
+    
 #ifdef __cplusplus
 }
 #endif

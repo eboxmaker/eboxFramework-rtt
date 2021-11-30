@@ -21,13 +21,8 @@
 #ifndef __EBOX_CONFIG_H
 #define __EBOX_CONFIG_H
 
-#if EBOX_DEBUG
-#define DBG_UART   uart1
-#define DBG(...)    ebox_printf(__VA_ARGS__)
-#else
-#define DBG(...)
-#endif
 
+#define EBOX_DEBUG true
 
 
 #endif

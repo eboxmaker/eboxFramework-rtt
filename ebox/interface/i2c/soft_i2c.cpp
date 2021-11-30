@@ -9,13 +9,13 @@
 
 
 #if EBOX_DEBUG_SOFTI2C_ENABLE
-#define softI2cDebug(...)  ebox_printf("[sI2C DBG]:%d: ",__LINE__),ebox_printf(__VA_ARGS__ )
+#define softI2cDebug(...)  rt_kprintf("[sI2C DBG]:%d: ",__LINE__),rt_kprintf(__VA_ARGS__ )
 #else
 #define softI2cDebug(...)
 #endif
 
 #if EBOX_DEBUG_SOFTI2C_ENABLE_ERR
-#define softI2cDebugErr(fmt, ...)  ebox_printf("[sI2C err]:%d: " fmt "\n", __LINE__, __VA_ARGS__)
+#define softI2cDebugErr(fmt, ...)  rt_kprintf("[sI2C err]:%d: " fmt "\n", __LINE__, __VA_ARGS__)
 #else
 #define softI2cDebugErr(fmt, ...)
 #endif

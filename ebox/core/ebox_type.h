@@ -7,7 +7,6 @@
 #include <math.h>
 #include <stdint.h>
 
-#include "ebox_cpu_type.h"
 #include "enum.h"
 
 

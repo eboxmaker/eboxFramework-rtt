@@ -53,7 +53,6 @@ size_t Print::write(const uint8_t *buffer, size_t size)
 
 size_t Print::printf(const char *fmt, ...)
 {
-#if USE_PRINTF
     int     size1 = 0;
     size_t  size2 = 64;
     char *p;
@@ -83,7 +82,6 @@ size_t Print::printf(const char *fmt, ...)
     write(p, size1);
     rt_free(p);
     return size1;
-#endif
 }
 size_t Print::print(const String &s)
 {

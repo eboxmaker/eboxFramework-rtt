@@ -20,6 +20,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "ebox_uart.h"
+
 static uint32_t serial_irq_ids[UART_NUM] = {0};
 
 static uart_irq_handler irq_handler;
@@ -374,6 +375,7 @@ void Uart::flush()
 */
 size_t Uart::write(uint8_t c)
 {
+//    mutex->trylock();
     if(!_is_inited) return 0;
     uint16_t i = (_tx_buffer_head[index] + 1) % _tx_buffer_size[index];//计算头的位置
     // head = tail, 缓冲区过满，先发送

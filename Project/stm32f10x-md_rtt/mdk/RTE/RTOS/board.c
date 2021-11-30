@@ -76,6 +76,18 @@ INIT_BOARD_EXPORT(uart_init);
 void rt_hw_console_output(const char *str)
 {
 //#error "TODO 3: Output the string 'str' through the uart."
+//    while(1)
+//    {
+//        if(*str != 0)
+//        {
+//            console_uart_putc(*str);
+//            str++;
+//        }
+//        else
+//        {
+//            break;
+//        }
+//    }
     console_uart_write(str,strlen(str));
 }
 

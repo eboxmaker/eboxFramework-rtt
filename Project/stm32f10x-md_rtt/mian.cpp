@@ -25,6 +25,7 @@
 #include "cxx_Thread.h"
 
 using namespace rtthread;
+#include "rtcMillis.h"
 
 /**
 	*	1	此例程演示了GPIO中断
@@ -36,15 +37,19 @@ using namespace rtthread;
 /* 定义例程名和例程发布日期 */
 #define EXAMPLE_NAME	"STM32F0 GPIO_EXTI example"
 #define EXAMPLE_DATE	"2017-09-10"
+RtcMillis rtc;
+DateTime dt(__DATE__,__TIME__,8);//东八区
 
 void setup()
 {
     console_uart_init();
     print_log(EXAMPLE_NAME, EXAMPLE_DATE);
     LED1.mode(OUTPUT_PP);
+    rtc.begin(dt);
 }
 
 
+Mutex *mutex;
 //动态线程任务
 static void dynamic_entry(void *param)
 {
@@ -52,7 +57,7 @@ static void dynamic_entry(void *param)
 	
     while (++cnt)
     {
-		rt_kprintf("dynamic_thread is run:%d\n",cnt);
+//		rt_kprintf("dynamic_thread is run:%d\n",cnt);
         rt_thread_mdelay(500);
     }
 }
@@ -78,17 +83,19 @@ void myTask(void *p)
 {
     while(1)
     {
-        uart1.printf("MyTask Run\n");
+        rtc.update();
+        rtc.dateTime.print(UART);
         Thread::sleep(1000);
     }
 }
+Thread *task1;
 
 int main(void)
 {
     setup();
     thread_sample();
-    Thread task1(myTask);
-    task1.start();
+    task1 = new Thread(myTask);
+    task1->start();
     while(1)
     {
         LED1.toggle();

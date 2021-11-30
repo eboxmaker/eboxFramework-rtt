@@ -2,19 +2,19 @@
 
 #if EBOX_DEBUG
 // 是否打印调试信息, 1打印,0不打印
-#define EBOX_DEBUG_MCUI2C_ENABLE       true
-#define EBOX_DEBUG_MCUI2C_ENABLE_ERR   true
+#define EBOX_DEBUG_MCUI2C_ENABLE       false
+#define EBOX_DEBUG_MCUI2C_ENABLE_ERR   false
 #endif
 
 
 #if EBOX_DEBUG_MCUI2C_ENABLE
-#define mcuI2cDebug(...)  ebox_printf("[mcuI2C DBG]:%d: ",__LINE__),ebox_printf(__VA_ARGS__ )
+#define mcuI2cDebug(...)  rt_kprintf("[mcuI2C DBG]:%d: ",__LINE__),rt_kprintf(__VA_ARGS__ )
 #else
 #define mcuI2cDebug(...)
 #endif
 
 #if EBOX_DEBUG_MCUI2C_ENABLE_ERR
-#define mcuI2cDebugErr(fmt, ...)  ebox_printf("[mcuI2C err]:%d: " fmt "\n", __LINE__, __VA_ARGS__)
+#define mcuI2cDebugErr(fmt, ...)  rt_kprintf("[mcuI2C err]:%d: " fmt "\n", __LINE__, __VA_ARGS__)
 #else
 #define mcuI2cDebugErr(fmt, ...)
 #endif

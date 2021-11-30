@@ -195,9 +195,6 @@ static void update_system_clock(CpuClock_t *clock)
 */
 static void update_chip_info()
 {
-    cpu.type = MCU_TYPE;
-    cpu.pins = MCU_PINS;
-    memcpy(cpu.company, MCU_COMPANY, sizeof(MCU_COMPANY));
 
     uint8_t *p = (uint8_t *)(0X1FFFF7E8);
     for(int i = 0 ; i < 12; i++)
@@ -225,12 +222,6 @@ static void update_chip_info()
     milli_seconds = 0;
     SysTick->VAL = SysTick->LOAD;
     //统计cpu计算能力//////////////////
-    do
-    {
-        cpu.ability++;//统计cpu计算能力
-    }
-    while (milli_seconds < 1);
-    cpu.ability = cpu.ability  * 1000 * 9;
     ////////////////////////////////
 #if	EBOX_DEBUG
 #endif

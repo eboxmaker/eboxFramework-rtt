@@ -21,7 +21,6 @@
 #define __RINGBUF_H
 
 #include "ebox_type.h"
-#include "ebox_mem.h"
 
 /**
 使用方法：
@@ -52,7 +51,7 @@ public:
 
     bool begin(uint16_t size)
     {
-        ptr = (T *)ebox_malloc(size * sizeof(T));
+        ptr = (T *)rt_malloc(size * sizeof(T));
         max = size;
         if(ptr != NULL)
             return true;

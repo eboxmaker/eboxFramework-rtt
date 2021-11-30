@@ -1,10 +1,10 @@
 #include "soft_i2c.h"
-
+#include "ebox_core.h"
 
 #if EBOX_DEBUG
 // 是否打印调试信息, 1打印,0不打印
-#define EBOX_DEBUG_SOFTI2C_ENABLE       true
-#define EBOX_DEBUG_SOFTI2C_ENABLE_ERR   true
+#define EBOX_DEBUG_SOFTI2C_ENABLE       false
+#define EBOX_DEBUG_SOFTI2C_ENABLE_ERR   false
 #endif
 
 

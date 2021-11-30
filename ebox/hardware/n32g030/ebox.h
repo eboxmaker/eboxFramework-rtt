@@ -39,6 +39,7 @@ extern "C" {
 
 #ifdef __cplusplus
 #include "ebox_gpio.h"
+#include "ebox_uart.h"
 //#include "ebox_adc.h"
 //#include "ebox_exti.h"
 //#include "ebox_timer.h"
@@ -46,7 +47,6 @@ extern "C" {
 //#include "ebox_pulse.h"
 //#include "ebox_in_capture.h"
 //#include "ebox_encoder.h"
-//#include "ebox_uart.h"
 //#include "ebox_rtc.h"
 //#include "ebox_iflash.h"
 //#include "ebox_dac.h"
@@ -59,7 +59,6 @@ extern "C" {
 #include "ebox_mcu_spi.h"
 
 
-#if USE_OBJECT
 
 //创建所有引脚对象和宏定义其指针
 #if USE_UART1
@@ -233,6 +232,5 @@ extern mcuGpio PG15;
 #include "bsp_ebox.h"
 #endif
 
-#endif
 #endif
 

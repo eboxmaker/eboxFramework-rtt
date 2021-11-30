@@ -1,6 +1,4 @@
 #include "ebox_core.h"
-#include "ebox_mem.h"
-
 #include "fifo.h"
 
 // #define min(a,b) ((a) < (b) ? (a):(b))
@@ -16,7 +14,7 @@ struct ebox_fifo *ebox_fifo_init(unsigned char *buffer, unsigned int size)
 {
     struct ebox_fifo *fifo;
 
-    fifo = (struct ebox_fifo *)ebox_malloc(sizeof(struct ebox_fifo));
+    fifo = (struct ebox_fifo *)rt_malloc(sizeof(struct ebox_fifo));
     if (fifo == NULL)
         return NULL;
 
@@ -44,7 +42,7 @@ struct ebox_fifo *ebox_fifo_alloc(unsigned int size)
     * wrap' tachnique works only in this case.
     */
 
-    buffer = (unsigned char *)ebox_malloc(size);
+    buffer = (unsigned char *)rt_malloc(size);
     if (buffer == NULL)
         return NULL;
 
@@ -64,8 +62,8 @@ struct ebox_fifo *ebox_fifo_alloc(unsigned int size)
 */
 void ebox_fifo_free(struct ebox_fifo *fifo)
 {
-    ebox_free(fifo->buffer);
-    ebox_free(fifo);
+    rt_free(fifo->buffer);
+    rt_free(fifo);
 }
 
 
@@ -86,10 +84,10 @@ unsigned int ebox_fifo_put(struct ebox_fifo *fifo, unsigned char *buffer, unsign
 
     /* first put the data starting from fifo->in to buffer end*/
     l = min2v(len, fifo->size - (fifo->in & (fifo->size - 1)));
-    ebox_memcpy(fifo->buffer + (fifo->in & (fifo->size - 1)), buffer, l);
+    rt_memcpy(fifo->buffer + (fifo->in & (fifo->size - 1)), buffer, l);
 
     /* then put the rest (if any) at the beginning of the buffer*/
-    ebox_memcpy(fifo->buffer, buffer + l, len - l);
+    rt_memcpy(fifo->buffer, buffer + l, len - l);
 
     fifo->in += len;
 
@@ -113,10 +111,10 @@ unsigned int ebox_fifo_get(struct ebox_fifo *fifo, unsigned char *buffer, unsign
 
     /* first get the data from fifo->out until the end of the buffer*/
     l = min2v(len, fifo->size - (fifo->out & (fifo->size - 1)));
-    ebox_memcpy(buffer, fifo->buffer + (fifo->out & (fifo->size - 1)), l);
+    rt_memcpy(buffer, fifo->buffer + (fifo->out & (fifo->size - 1)), l);
 
     /* then get the rest (if any) from the beginning of the buffer*/
-    ebox_memcpy(buffer + l, fifo->buffer, len - l);
+    rt_memcpy(buffer + l, fifo->buffer, len - l);
 
     fifo->out += len;
 

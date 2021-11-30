@@ -19,9 +19,64 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __BSP_EBOX_H
 #define __BSP_EBOX_H
+
+#ifdef __cplusplus
+
+
 #include "ebox.h"
+#include "EventManager.h"
+#include "soft_i2c.h"
+
 
 #define	HARDWARE	"ebox_spark£¬STM32F103C8T6"
+#define ConsoleUart uart1
+#define UART      uart1
+#define Serial      uart1
+
+extern void print_log(const char *name = "test", const char *date = __DATE__);
+ 
+
+
+
+
+#define BTN1 PA8
+
+#define LED_R PB7
+#define LED_G PB8
+#define LED_B PB9
+
+#define LED1 PB8
+#define LED2 PB9
+#define LED3 PB10
+#define I2C  i2c2
+
+
+
+#endif
+
+
+
+
+
+
+
+
+
+
+#if __cplusplus
+extern "C" {
+#endif
+extern void console_uart_init();
+extern void console_uart_putc(char ch);
+extern void console_uart_write(const char *p,unsigned char len);
+    
+#ifdef __cplusplus
+}
+#endif
+
+
+
+
 
 #endif
 

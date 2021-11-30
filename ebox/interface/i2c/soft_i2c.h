@@ -1,7 +1,7 @@
 #ifndef __SOFT_I2C_H
 #define __SOFT_I2C_H
 #include "i2c.h"
-
+#include "ebox_core.h"
 
 class SoftI2c : public I2c
 {

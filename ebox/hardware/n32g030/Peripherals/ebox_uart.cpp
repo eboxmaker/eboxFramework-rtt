@@ -20,7 +20,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "ebox_uart.h"
-#include "ebox_mem.h"
 static uint32_t serial_irq_ids[UART_NUM] = {0};
 
 static uart_irq_handler irq_handler;
@@ -135,11 +134,11 @@ void Uart::begin(uint32_t baud_rate, uint8_t data_bit, uint8_t parity, float sto
     _rx_buffer_size[index] = rx_buffer_size;
 
 #ifdef UART_9_BIT
-    _tx_ptr[index] = (uint16_t *)ebox_malloc(_tx_buffer_size[index] * sizeof(uint16_t));
-    _rx_ptr[index] = (uint16_t *)ebox_malloc(_rx_buffer_size[index] * sizeof(uint16_t));
+    _tx_ptr[index] = (uint16_t *)rt_malloc(_tx_buffer_size[index] * sizeof(uint16_t));
+    _rx_ptr[index] = (uint16_t *)rt_malloc(_rx_buffer_size[index] * sizeof(uint16_t));
 #else
-    _tx_ptr[index] = (uint8_t *)ebox_malloc(_tx_buffer_size[index] * sizeof(uint8_t));
-    _rx_ptr[index] = (uint8_t *)ebox_malloc(_rx_buffer_size[index] * sizeof(uint8_t));
+    _tx_ptr[index] = (uint8_t *)rt_malloc(_tx_buffer_size[index] * sizeof(uint8_t));
+    _rx_ptr[index] = (uint8_t *)rt_malloc(_rx_buffer_size[index] * sizeof(uint8_t));
 #endif
 
 

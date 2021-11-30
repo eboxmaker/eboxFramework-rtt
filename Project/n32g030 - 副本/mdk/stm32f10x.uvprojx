@@ -529,6 +529,11 @@
               <FilePath>..\..\..\ebox\core\ebox_core.cpp</FilePath>
             </File>
             <File>
+              <FileName>ebox_init.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\ebox\core\ebox_init.cpp</FilePath>
+            </File>
+            <File>
               <FileName>big_little.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\ebox\core\big_little.c</FilePath>
@@ -537,6 +542,11 @@
               <FileName>crc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\ebox\core\crc.c</FilePath>
+            </File>
+            <File>
+              <FileName>ebox_mem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\ebox\core\ebox_mem.c</FilePath>
             </File>
             <File>
               <FileName>fifo.c</FileName>
@@ -564,6 +574,11 @@
               <FilePath>..\..\..\ebox\core\print.cpp</FilePath>
             </File>
             <File>
+              <FileName>ringbuf.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\ebox\core\ringbuf.cpp</FilePath>
+            </File>
+            <File>
               <FileName>sort.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\..\..\ebox\core\sort.cpp</FilePath>
@@ -579,9 +594,19 @@
               <FilePath>..\..\..\ebox\core\WString.cpp</FilePath>
             </File>
             <File>
+              <FileName>myprintf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\ebox\core\myprintf.c</FilePath>
+            </File>
+            <File>
               <FileName>retarge.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\..\..\ebox\core\retarge.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>list_c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\ebox\core\list_c.c</FilePath>
             </File>
             <File>
               <FileName>ebox_math.cpp</FileName>
@@ -642,6 +667,41 @@
               <FileName>soft_spi.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\..\..\ebox\interface\spi\soft_spi.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>interface/file</GroupName>
+          <Files>
+            <File>
+              <FileName>Dir.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\ebox\interface\storage\filesystem\Dir.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>File.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\ebox\interface\storage\filesystem\File.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FileHandle.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\ebox\interface\storage\filesystem\FileHandle.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FileSystem.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\ebox\interface\storage\filesystem\FileSystem.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FileSystemHandle.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\ebox\interface\storage\filesystem\FileSystemHandle.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FileBase.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\ebox\interface\storage\filesystem\FileBase.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -743,9 +803,6 @@
         <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
-        <Group>
-          <GroupName>::RTOS</GroupName>
-        </Group>
       </Groups>
     </Target>
   </Targets>
@@ -759,31 +816,8 @@
           <targetInfo name="Target 1"/>
         </targetInfos>
       </component>
-      <component Cbundle="RT-Thread" Cclass="RTOS" Cgroup="kernel" Cvendor="RealThread" Cversion="3.1.5" condition="CMSIS Core with RTOS">
-        <package license="License.txt" name="RT-Thread" schemaVersion="1.4" supportContact="https://www.rt-thread.org" url="https://www.rt-thread.org/download/mdk/" vendor="RealThread" version="3.1.5"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
-      </component>
     </components>
-    <files>
-      <file attr="config" category="source" name="bsp\_template\board.c" version="3.1.5">
-        <instance index="0">RTE\RTOS\board.c</instance>
-        <component Cbundle="RT-Thread" Cclass="RTOS" Cgroup="kernel" Cvendor="RealThread" Cversion="3.1.5" condition="CMSIS Core with RTOS"/>
-        <package license="License.txt" name="RT-Thread" schemaVersion="1.4" supportContact="https://www.rt-thread.org" url="https://www.rt-thread.org/download/mdk/" vendor="RealThread" version="3.1.5"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
-      </file>
-      <file attr="config" category="header" name="bsp\_template\rtconfig.h" version="3.1.5">
-        <instance index="0">RTE\RTOS\rtconfig.h</instance>
-        <component Cbundle="RT-Thread" Cclass="RTOS" Cgroup="kernel" Cvendor="RealThread" Cversion="3.1.5" condition="CMSIS Core with RTOS"/>
-        <package license="License.txt" name="RT-Thread" schemaVersion="1.4" supportContact="https://www.rt-thread.org" url="https://www.rt-thread.org/download/mdk/" vendor="RealThread" version="3.1.5"/>
-        <targetInfos>
-          <targetInfo name="Target 1"/>
-        </targetInfos>
-      </file>
-    </files>
+    <files/>
   </RTE>
 
   <LayerInfo>

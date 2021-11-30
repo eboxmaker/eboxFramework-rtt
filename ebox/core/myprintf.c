@@ -1,7 +1,6 @@
 
 #include <stdarg.h>
 #include <stdlib.h>
-#include "ebox_mem.h"
 
 #include "myprintf.h"
 

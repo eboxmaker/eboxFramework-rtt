@@ -20,7 +20,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "ebox_uart.h"
-#include "ebox_mem.h"
 static uint32_t serial_irq_ids[UART_NUM] = {0};
 
 static uart_irq_handler irq_handler;

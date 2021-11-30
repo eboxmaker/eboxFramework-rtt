@@ -38,7 +38,7 @@ void rt_os_tick_callback(void)
 
     rt_interrupt_leave();
 }
-#include "ebox_core.h"
+#include "bsp_ebox.h"
 #include "mcu.h"
 /**
  * This function will initial your board.
@@ -50,6 +50,9 @@ void rt_hw_board_init(void)
      * Enable the hardware timer and call the rt_os_tick_callback function
      * periodically with the frequency RT_TICK_PER_SECOND. 
      */
+#if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
+    rt_system_heap_init(rt_heap_begin_get(), rt_heap_end_get());
+#endif
     ebox_init();
 
     attachSystickCallBack(rt_os_tick_callback,1);
@@ -58,16 +61,14 @@ void rt_hw_board_init(void)
     rt_components_board_init();
 #endif
 
-#if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
-    rt_system_heap_init(rt_heap_begin_get(), rt_heap_end_get());
-#endif
+
 }
 
 #ifdef RT_USING_CONSOLE
 
 static int uart_init(void)
 {
-//#error "TODO 2: Enable the hardware uart and config baudrate."
+    console_uart_init();
     return 0;
 }
 INIT_BOARD_EXPORT(uart_init);
@@ -75,7 +76,7 @@ INIT_BOARD_EXPORT(uart_init);
 void rt_hw_console_output(const char *str)
 {
 //#error "TODO 3: Output the string 'str' through the uart."
-    ebox_printf(str);
+    console_uart_write(str,strlen(str));
 }
 
 #endif

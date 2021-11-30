@@ -61,7 +61,6 @@ extern "C" {
 #include "ebox_mcu_spi.h"
 
 
-#if USE_OBJECT
 
 //创建所有引脚对象和宏定义其指针
 #if USE_UART1
@@ -235,6 +234,5 @@ extern mcuGpio PG15;
 #include "bsp_ebox.h"
 #endif
 
-#endif
 #endif
 

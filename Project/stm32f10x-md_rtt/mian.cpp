@@ -39,7 +39,7 @@ using namespace rtthread;
 
 void setup()
 {
-    UART.begin(115200);
+    console_uart_init();
     print_log(EXAMPLE_NAME, EXAMPLE_DATE);
     LED1.mode(OUTPUT_PP);
 }

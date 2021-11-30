@@ -26,7 +26,6 @@
 
 #include "itoa.h"
 #include "ebox_core.h"
-#include "ebox_mem.h"
 
 #include "WString.h"
 
@@ -41,10 +40,8 @@ char *dtostrf (double val, signed char width, unsigned char prec, char *sout)
     char fmt[20];
     //  vsnprintf(fmt, "%%%d.%df", width, prec);
     //  sprintf(sout, fmt, val);
-#if USE_PRINTF
-    ebox_sprintf(fmt, "%%%d.%df", width, prec);
-    ebox_sprintf(sout, fmt, val);
-#endif
+    rt_sprintf(fmt, "%%%d.%df", width, prec);
+    rt_sprintf(sout, fmt, val);
     return sout;
 }
 

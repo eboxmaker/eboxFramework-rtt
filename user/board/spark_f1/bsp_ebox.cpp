@@ -19,9 +19,21 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "bsp_ebox.h"
-#include "ebox_mem.h"
+extern "C" {
 
-
+    void console_uart_init()
+    {
+        UART.begin(115200);
+    }
+    void console_uart_putc(char ch)
+    {
+        UART.write(ch);
+    }
+    void console_uart_write(const char *p,uint8_t len)
+    {
+        UART.write(p,len);
+    }
+}
 /*
 *********************************************************************************************************
 *	º¯ Êý Ãû: PrintfLog

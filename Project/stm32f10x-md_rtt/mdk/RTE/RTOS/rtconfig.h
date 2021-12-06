@@ -27,7 +27,7 @@
 
 // <o>the stack size of main thread<1-4086>
 //  <i>Default: 512
-#define RT_MAIN_THREAD_STACK_SIZE     512
+#define RT_MAIN_THREAD_STACK_SIZE     1024
 
 // </h>
 
@@ -117,13 +117,13 @@
 // <o>the buffer size of console <1-1024>
 //  <i>the buffer size of console
 //  <i>Default: 128  (128Byte)
-#define RT_CONSOLEBUF_SIZE          256
+#define RT_CONSOLEBUF_SIZE          128
 // </h>
 
 // <h>FinSH Configuration
 // <c1>include finsh config
 //  <i>Select this choice if you using FinSH 
-//#include "finsh_config.h"
+#include "finsh_config.h"
 // </c>
 // </h>
 

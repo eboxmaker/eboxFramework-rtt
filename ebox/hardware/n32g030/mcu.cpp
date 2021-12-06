@@ -31,8 +31,6 @@ extern "C" {
 __IO uint32_t milli_seconds;//提供一个mills()等效的全局变量。降低cpu调用开销
 __IO uint16_t micro_para;
 
-static void update_system_clock(CpuClock_t *clock);
-static void update_chip_info(void);
 
 /**
   *@brief    保持空，频率由system_stm32f10x.c中定义决定
@@ -49,17 +47,19 @@ __weak void SystemClock_Config()
   *@param    mcu
   *@retval   none
   */
-void mcu_init(void)
+void ebox_init(void)
 {
     SystemClock_Config();
     
     // update 时钟信息
-    update_system_clock(&cpu.clock);
+    SystemCoreClockUpdate();
 
     // 配置systemtick
-    SysTick_Config(cpu.clock.core / 1000); //  每隔 1ms产生一次中断
+    CpuClock_t clock;
+    get_system_clock(&clock);
+    SysTick_Config(clock.core / 1000); //  每隔 1ms产生一次中断
     SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK);//systemticks clock；
-    micro_para = cpu.clock.core / 1000000; //减少micros函数计算量
+    micro_para = clock.core / 1000000; //减少micros函数计算量
 
     //将pb4默认设置为IO口，禁用jtag
 //    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
@@ -67,7 +67,8 @@ void mcu_init(void)
 //    NVIC_PriorityGroupConfig(NVIC_GROUP_CONFIG);
 //    
     attachSystickCallBack(nullFun,1);
-    update_chip_info();
+    milli_seconds = 0;
+
 }
 
 void mcu_reset(void)
@@ -80,7 +81,7 @@ void mcu_reset(void)
   *@param    mcu
   *@retval   none
   */
-uint32_t mcu_micros(void)
+uint32_t micros(void)
 {
     uint32_t micro;
     micro = (milli_seconds * 1000 + (1000 - (SysTick->VAL) / (micro_para)));
@@ -92,7 +93,7 @@ uint32_t mcu_micros(void)
   *@param    mcu
   *@retval   none
   */
-uint32_t mcu_millis( void )
+uint32_t millis( void )
 {
     return milli_seconds;
 }
@@ -102,11 +103,11 @@ uint32_t mcu_millis( void )
   *@param    uint32_t ms  要延时的时长，最小1ms
   *@retval   none
  */
-void mcu_delay_ms(uint32_t ms)
+void delay_ms(uint32_t ms)
 {
     uint32_t end ;
-    end = mcu_micros() + ms * 1000 ;
-    while (mcu_micros() < end);
+    end = micros() + ms * 1000 ;
+    while (micros() < end);
 }
 /**
   *@brief    us延时,使用systick计数器。48Mhz及以上时钟时可以满足us(1.3)精度。
@@ -114,7 +115,7 @@ void mcu_delay_ms(uint32_t ms)
   *@param    uint32_t us  要延时的时长，最小1us
   *@retval   none
  */
-void  mcu_delay_us(uint32_t us)
+void  delay_us(uint32_t us)
 {
     if(us == 0) return;
     uint32_t ticks;
@@ -175,11 +176,10 @@ void SysTick_Handler(void)
  *@param    *clock：  时钟指针，返回系统时钟
  *@retval   none
 */
-static void update_system_clock(CpuClock_t *clock)
+void get_system_clock(CpuClock_t *clock)
 {
     RCC_ClocksType RCC_ClocksStatus;
 
-    SystemCoreClockUpdate();
     RCC_GetClocksFreqValue(&RCC_ClocksStatus);
 
     clock->core = RCC_ClocksStatus.SysclkFreq;
@@ -193,38 +193,32 @@ static void update_system_clock(CpuClock_t *clock)
  *@param    none
  *@retval   none
 */
-static void update_chip_info()
+void get_chip_info(Cpu_t *cpu)
 {
 
     uint8_t *p = (uint8_t *)(0X1FFFF7E8);
     for(int i = 0 ; i < 12; i++)
     {
-        cpu.chip_id[i] = *p++;
+        cpu->chip_id[i] = *p++;
     }
 
 
-    cpu.flash.size = *(uint16_t *)(0x1FFFF7E0);   //芯片flash容量
-    switch(cpu.flash.size)
+    cpu->flash.size = *(uint16_t *)(0x1FFFF7E0);   //芯片flash容量
+    switch(cpu->flash.size)
     {
         case 32:
         case 64:
         case 128:
-            cpu.flash.page_size = 1024;
+            cpu->flash.page_size = 1024;
             break;
         default:
-            cpu.flash.page_size = 2048;
+            cpu->flash.page_size = 2048;
             break;
     }
-    cpu.flash.size = cpu.flash.size * 1024;
-    cpu.flash.start = MCU_FLASH_BEGIN;
-    cpu.flash.end = MCU_FLASH_BEGIN + cpu.flash.size - 1;
-    cpu.flash.used = MCU_FLASH_USED;
-    milli_seconds = 0;
+    cpu->flash.size = cpu->flash.size * 1024;
+    cpu->flash.start = MCU_FLASH_BEGIN;
+    cpu->flash.used = MCU_FLASH_USED;
     SysTick->VAL = SysTick->LOAD;
-    //统计cpu计算能力//////////////////
-    ////////////////////////////////
-#if	EBOX_DEBUG
-#endif
-    }
+}
 
 }

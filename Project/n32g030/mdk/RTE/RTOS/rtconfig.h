@@ -67,7 +67,7 @@
 #define RT_TIMER_THREAD_PRIO        4
 // <o>The stack size of timer thread <0-8192>
 //  <i>Default: 512
-#define RT_TIMER_THREAD_STACK_SIZE  512
+#define RT_TIMER_THREAD_STACK_SIZE  256
 // </e>
 
 // <h>IPC(Inter-process communication) Configuration

@@ -87,12 +87,14 @@ Flash::Flash()
 }
 int AddrToPage(uint32_t addr)
 {
+    Cpu_t cpu;
+    get_chip_info(&cpu);
     return (addr - cpu.flash.start)/cpu.flash.page_size;
 }
 bool Flash::begin(int nPage)
 {
     
-    
+    get_chip_info(&cpu);
     //MCU_FLASH_PRG_END  +  FLASH_PAGE_SIZE
     uint8_t total_page = cpu.flash.size / cpu.flash.page_size;
     uint32_t page_pgm_end = cpu.flash.used / cpu.flash.page_size;
@@ -113,7 +115,7 @@ bool Flash::begin(int nPage)
     {
         nPage = 1;
     }
-    _end_addr =  cpu.flash.end;
+    _end_addr =  cpu.flash.start + cpu.flash.size - 1;
     _start_addr =  _end_addr - nPage * cpu.flash.page_size + 1; 
     
     iflashDebug("is_ok:%d\n",is_ok);

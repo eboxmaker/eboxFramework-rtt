@@ -56,6 +56,8 @@ extern void     mcu_reset(void);
 // 时间相关接口
 // systick中断回调函数
 extern uint16_t attachSystickCallBack(fun_noPara_t fun, uint16_t multiple); // 绑定中断回调函数，允许则定义周期 = multiple * 1ms; 最大65535
+extern void get_chip_info(Cpu_t *cpu);
+extern void get_system_clock(CpuClock_t *clock);
 
 
 #define GetEndTime(timeOut)         (milli_seconds + timeOut)

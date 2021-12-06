@@ -189,18 +189,20 @@ uint32_t Pulse::get_timer_source_clock()
 {
     uint32_t temp = 0;
     uint32_t timer_clock = 0x00;
+    CpuClock_t clk;
+    get_system_clock(&clk);
 
     if ((uint32_t)this->TIMx == TIM1_BASE)
     {
-        timer_clock = cpu.clock.pclk2;
+        timer_clock = clk.pclk2;
     }
     else
     {
         temp = RCC->CFGR;
         if(temp & 0x00000400)//检测PCLK是否进行过分频，如果进行过分频则定时器的频率为PCLK1的两倍
-            timer_clock = cpu.clock.pclk1 * 2;
+            timer_clock = clk.pclk1 * 2;
         else
-            timer_clock = cpu.clock.pclk1 ;
+            timer_clock = clk.pclk1 ;
     }
     return timer_clock;
 }

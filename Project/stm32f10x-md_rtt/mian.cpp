@@ -83,19 +83,45 @@ void myTask(void *p)
 {
     while(1)
     {
-        rtc.update();
-        rtc.dateTime.print(UART);
+//        rtc.update();
+//        rtc.dateTime.print(UART);
         Thread::sleep(1000);
     }
 }
 Thread *task1;
 
+class ThreadA:public Thread
+{
+public:
+    ThreadA(String &nm)
+    {
+        name = nm;
+    }
+    virtual void run(void *parameter)
+    {
+        while(1)
+        {
+//            uart1.printf("ThreadA:%s run\n",name.c_str());
+            Thread::sleep(1000);
+
+        }
+    }
+private:
+    String name;
+
+};
 int main(void)
 {
     setup();
     thread_sample();
     task1 = new Thread(myTask);
     task1->start();
+    String name = "name1";
+    ThreadA ta(name);
+    name = "name2";
+    ThreadA tb(name);
+    ta.start();
+    tb.start();
     while(1)
     {
         LED1.toggle();

@@ -50,6 +50,10 @@ extern "C" {
         ConsoleUart.write(p,len);
         ConsoleUart.flush();
     }
+    int console_uart_getc()
+    {
+        return ConsoleUart.read();
+    }
 }
 /*
 *********************************************************************************************************
@@ -61,6 +65,10 @@ extern "C" {
 */
 void print_log(const char *name, const char *date)
 {
+    Cpu_t cpu;
+    CpuClock_t clock;
+    get_chip_info(&cpu);
+
     ConsoleUart.print("\n");
     ConsoleUart.print("*************************************************************\n");
     ConsoleUart.print("* \r\n");	                /* 打印一行空格 */
@@ -90,16 +98,16 @@ void print_log(const char *name, const char *date)
 
 
     ConsoleUart.print("* core          : ");
-    ConsoleUart.print(cpu.clock.core / 1000000.0);	/* 打印时钟树信息 */
+    ConsoleUart.print(clock.core / 1000000.0);	/* 打印时钟树信息 */
     ConsoleUart.println("Mhz");
     ConsoleUart.print("* hclk          : ");
-    ConsoleUart.print(cpu.clock.hclk / 1000000.0);
+    ConsoleUart.print(clock.hclk / 1000000.0);
     ConsoleUart.println("Mhz");
     ConsoleUart.print("* pclk1         : ");
-    ConsoleUart.print(cpu.clock.pclk1 / 1000000.0);
+    ConsoleUart.print(clock.pclk1 / 1000000.0);
     ConsoleUart.println("Mhz");
     ConsoleUart.print("* pclk2         : ");
-    ConsoleUart.print(cpu.clock.pclk2 / 1000000.0);
+    ConsoleUart.print(clock.pclk2 / 1000000.0);
     ConsoleUart.println("Mhz");
 
 

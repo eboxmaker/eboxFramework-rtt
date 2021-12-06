@@ -60,6 +60,8 @@ extern void     mcu_delay_ms(uint32_t ms);//ÑÓÊ±nºÁÃë¡£¿ÉÔÚÈÎÒâÇé¿öÏÂÊ¹ÓÃ£¬°üÀ¨½
 extern void     mcu_delay_us(uint32_t us);//ÑÓÊ±nÎ¢Ãë¡£¿ÉÔÚÈÎÒâÇé¿öÏÂÊ¹ÓÃ£¬°üÀ¨½ûÖ¹ËùÓĞÖĞ¶ÏµÄÇé¿ö¡£¾«¶ÈÕı¸º1us¡£
 // systickÖĞ¶Ï»Øµ÷º¯Êı
 extern uint16_t attachSystickCallBack(fun_noPara_t fun, uint16_t multiple); // °ó¶¨ÖĞ¶Ï»Øµ÷º¯Êı£¬ÔÊĞíÔò¶¨ÒåÖÜÆÚ = multiple * 1ms; ×î´ó65535
+void get_chip_info(Cpu_t *cpu);
+void get_system_clock(CpuClock_t *clock);
 
 
 #define GetEndTime(timeOut)         (milli_seconds + timeOut)

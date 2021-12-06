@@ -16,7 +16,7 @@
  * Please modify RT_HEAP_SIZE if you enable RT_USING_HEAP
  * the RT_HEAP_SIZE max value = (sram size - ZI size), 1024 means 1024 bytes
  */
-#define RT_HEAP_SIZE (10*1024)
+#define RT_HEAP_SIZE (13*1024)
 static rt_uint8_t rt_heap[RT_HEAP_SIZE];
 
 RT_WEAK void *rt_heap_begin_get(void)
@@ -78,17 +78,17 @@ void rt_hw_console_output(const char *str)
 //#error "TODO 3: Output the string 'str' through the uart."
 //    while(1)
 //    {
-//        if(*str != 0)
+//        if(*str == '\0')
+//        {
+//            return;
+//        }
+//        else
 //        {
 //            console_uart_putc(*str);
 //            str++;
 //        }
-//        else
-//        {
-//            break;
-//        }
 //    }
-    console_uart_write(str,strlen(str));
+    console_uart_write(str,rt_strlen(str));
 }
 
 #endif

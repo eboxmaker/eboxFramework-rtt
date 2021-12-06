@@ -4,7 +4,6 @@
 #if __cplusplus
 extern "C" {
 #endif
-    Cpu_t cpu;
 #if __cplusplus
 } // extern "C"
 #endif

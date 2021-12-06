@@ -64,6 +64,8 @@ public:
 private:
     uint32_t _start_addr;	// 起始地址
     uint32_t _end_addr;		// 结束地址
+    Cpu_t cpu;
+
 };
 
 

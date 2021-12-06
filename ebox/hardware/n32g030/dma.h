@@ -6,7 +6,7 @@
 #include "FunctionPointer.h"
 
 
-#define EBOX_DEBUG_DMA_ENABLE       true
+#define EBOX_DEBUG_DMA_ENABLE       false
 #define EBOX_DEBUG_DMA_ENABLE_ERR   false
 
 #if EBOX_DEBUG_SPI_ENABLE
@@ -26,7 +26,7 @@
 #if defined (STM32F10X_HD)
     #define DMA_NUM (12)
 #else 
-    #define DMA_NUM (7)
+    #define DMA_NUM (5)
 #endif
 enum DmaIrqType
 {
@@ -125,13 +125,13 @@ void dma_irq_handler(uint8_t index, DmaIrqHandler_t handler, uint32_t id);
 }
 #endif
 
-extern Dma Dma1Ch1;
-extern Dma Dma1Ch2;
-extern Dma Dma1Ch3;
-extern Dma Dma1Ch4;
-extern Dma Dma1Ch5;
-extern Dma Dma1Ch6;
-extern Dma Dma1Ch7;
+//extern Dma Dma1Ch1;
+//extern Dma Dma1Ch2;
+//extern Dma Dma1Ch3;
+//extern Dma Dma1Ch4;
+//extern Dma Dma1Ch5;
+//extern Dma Dma1Ch6;
+//extern Dma Dma1Ch7;
 #if defined (STM32F10X_HD)
 
 extern Dma Dma2Ch1;

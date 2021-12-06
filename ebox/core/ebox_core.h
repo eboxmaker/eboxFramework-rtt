@@ -39,7 +39,6 @@
 extern "C" {
 #endif
 
-extern Cpu_t cpu;
 extern uint32_t micros(void);               //获取系统当前运行了多长时间。单位：us
 extern uint32_t millis(void);               //获取系统当前运行了多长时间。单位：ms
 extern void     delay_ms(uint32_t ms);//延时n毫秒。可在任意情况下使用，包括禁止所有中断的情况。精度正负1us。

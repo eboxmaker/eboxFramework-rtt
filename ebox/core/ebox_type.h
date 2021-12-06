@@ -88,7 +88,6 @@ typedef uint8_t byte;
 
 typedef struct
 {
-    uint32_t pll_vco;
     uint32_t core;
     uint32_t hclk;
     uint32_t pclk2;
@@ -100,16 +99,13 @@ typedef struct
     uint32_t    size;
     uint16_t    page_size;
     uint32_t    start;
-    uint32_t    end;
     uint32_t    used;
-
 } FlashInfo_t;
 typedef struct
 {
     int     type;
     uint8_t     pins;
     FlashInfo_t flash;
-    CpuClock_t	clock;
     uint8_t    chip_id[12];
     char        company[8];
 

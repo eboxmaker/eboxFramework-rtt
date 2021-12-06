@@ -24,6 +24,13 @@
 
 #define EBOX_DEBUG true
 
+#include "ebox_core.h"
+extern "C" {
 
+    void console_uart_init();
+    void console_uart_putc(char ch);
+    void console_uart_write(const char *p,uint8_t len);
+    int console_uart_getc();
+}
 #endif
 

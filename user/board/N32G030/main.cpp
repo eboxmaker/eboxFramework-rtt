@@ -21,6 +21,7 @@
 
 #include "ebox.h"
 #include "bsp_ebox.h"
+#include "rtthread.h"
 /**
 	*	1	此例程演示了GPIO中断
     *   2   其中userbt1连接用户按键，按下和弹起绑定不同的回调函数
@@ -32,12 +33,29 @@
 #define EXAMPLE_NAME	"STM32F0 GPIO_EXTI example"
 #define EXAMPLE_DATE	"2017-09-10"
 
-
+void test(void *parameter)
+{
+    while(1)
+    {
+        PB7.toggle();
+        rt_thread_mdelay(100);
+    }
+}
 
 void setup()
 {
     ebox_init();
-
+    uart1.begin(115200);
+    PB6.mode(OUTPUT_PP_PU);
+    PB7.mode(OUTPUT_PP_PU);
+    rt_thread_t th =rt_thread_create("test",
+                             test,
+                              NULL,
+                             256,
+                             10,
+                             10);
+    rt_thread_startup(th);
+    
 }
 
 
@@ -47,6 +65,8 @@ int main(void)
     while(1)
     {
         //userbt1.soft_triger();
+        UART.print("123\n");
+        PB6.toggle();
         delay_ms(1000);
     }
 }

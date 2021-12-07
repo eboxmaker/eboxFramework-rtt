@@ -75,22 +75,22 @@ mcuGpio PA10(PA10_ID);
 //mcuGpio PA14(PA14_ID);
 //mcuGpio PA15(PA15_ID);
 
-//mcuGpio PB0(PB0_ID);
-//mcuGpio PB1(PB1_ID);
-//mcuGpio PB2(PB2_ID);
-//mcuGpio PB3(PB3_ID);
-//mcuGpio PB4(PB4_ID);
-//mcuGpio PB5(PB5_ID);
-//mcuGpio PB6(PB6_ID);
-//mcuGpio PB7(PB7_ID);
-//mcuGpio PB8(PB8_ID);
-//mcuGpio PB9(PB9_ID);
-//mcuGpio PB10(PB10_ID);
-//mcuGpio PB11(PB11_ID);
-//mcuGpio PB12(PB12_ID);
-//mcuGpio PB13(PB13_ID);
-//mcuGpio PB14(PB14_ID);
-//mcuGpio PB15(PB15_ID);
+mcuGpio PB0(PB0_ID);
+mcuGpio PB1(PB1_ID);
+mcuGpio PB2(PB2_ID);
+mcuGpio PB3(PB3_ID);
+mcuGpio PB4(PB4_ID);
+mcuGpio PB5(PB5_ID);
+mcuGpio PB6(PB6_ID);
+mcuGpio PB7(PB7_ID);
+mcuGpio PB8(PB8_ID);
+mcuGpio PB9(PB9_ID);
+mcuGpio PB10(PB10_ID);
+mcuGpio PB11(PB11_ID);
+mcuGpio PB12(PB12_ID);
+mcuGpio PB13(PB13_ID);
+mcuGpio PB14(PB14_ID);
+mcuGpio PB15(PB15_ID);
 
 
 #if (MCU_PINS >= 64)

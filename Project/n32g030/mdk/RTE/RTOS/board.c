@@ -16,7 +16,7 @@
  * Please modify RT_HEAP_SIZE if you enable RT_USING_HEAP
  * the RT_HEAP_SIZE max value = (sram size - ZI size), 1024 means 1024 bytes
  */
-#define RT_HEAP_SIZE (4*1024)
+#define RT_HEAP_SIZE (2*1024)
 static rt_uint8_t rt_heap[RT_HEAP_SIZE];
 
 RT_WEAK void *rt_heap_begin_get(void)
@@ -68,7 +68,7 @@ void rt_hw_board_init(void)
 
 static int uart_init(void)
 {
-    console_uart_init();
+//    console_uart_init();
     return 0;
 }
 INIT_BOARD_EXPORT(uart_init);
@@ -88,7 +88,7 @@ void rt_hw_console_output(const char *str)
 //            break;
 //        }
 //    }
-    console_uart_write(str,strlen(str));
+//    console_uart_write(str,strlen(str));
 }
 
 #endif

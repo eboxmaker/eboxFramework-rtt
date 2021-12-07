@@ -70,7 +70,7 @@
 //”√ªß≈‰÷√//////////////
 
 #define USE_UART1 1
-#define USE_UART2 1
+#define USE_UART2 0
 #define USE_UART3 0
 
 #if defined (STM32F10X_HD)
@@ -125,7 +125,7 @@ typedef void (*uart_irq_handler)(uint32_t id, IrqType type);
 class Uart: public Stream
 {
 public:
-    Uart(USART_Module *USARTx, Gpio *tx_pin, Gpio *rx_pin, uint16_t tx_buffer_size = 64, uint16_t rx_buffer_size = 64);
+    Uart(USART_Module *USARTx, Gpio *tx_pin, Gpio *rx_pin, uint16_t tx_buffer_size = 32, uint16_t rx_buffer_size = 64);
 
     //initial uart
     void    begin(uint32_t baud_rate, RxMode_t mode = RxDMA);

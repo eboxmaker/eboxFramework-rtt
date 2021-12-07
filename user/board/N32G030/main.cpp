@@ -21,7 +21,6 @@
 
 #include "ebox.h"
 #include "bsp_ebox.h"
-#include "rtthread.h"
 /**
 	*	1	此例程演示了GPIO中断
     *   2   其中userbt1连接用户按键，按下和弹起绑定不同的回调函数
@@ -38,7 +37,6 @@ void test(void *parameter)
     while(1)
     {
         PB7.toggle();
-        rt_thread_mdelay(100);
     }
 }
 
@@ -48,13 +46,6 @@ void setup()
     uart1.begin(115200);
     PB6.mode(OUTPUT_PP_PU);
     PB7.mode(OUTPUT_PP_PU);
-    rt_thread_t th =rt_thread_create("test",
-                             test,
-                              NULL,
-                             256,
-                             10,
-                             10);
-    rt_thread_startup(th);
     
 }
 
